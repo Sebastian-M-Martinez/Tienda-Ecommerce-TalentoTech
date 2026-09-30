@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "nombre": "Seba Rodriguez",
+    "email": "seba.rodriguez@email.com",
+    "puesto": "CEO & Frontend Developer",
+    "foto": "/images/pexels-absoluteabhi-38889909.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Alberto Martínez",
+    "email": "alberto.martinez@email.com",
+    "puesto": "Product Manager",
+    "foto": "/images/pexels-sandro-tavares-260503371-17594386.jpg"
+  },
+  {
+    "id": 3,
+    "nombre": "Carlos Gómez",
+    "email": "carlos.gomez@email.com",
+    "puesto": "UX/UI Designer",
+    "foto": "/images/pexels-vincent-santamaria-194760512-37148339.jpg"
+  },
+  {
+    "id": 4,
+    "nombre": "Laura Tech",
+    "email": "laura.tech@email.com",
+    "puesto": "Lead Instructor",
+    "foto": "/images/pexels-peterdanthy-34411769.jpg"
+  }
+]

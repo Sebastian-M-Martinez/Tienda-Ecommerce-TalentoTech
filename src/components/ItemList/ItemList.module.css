@@ -1,0 +1,8 @@
+/* /components/ItemList/ItemList.module.css */
+.contenedorLista {
+    display: flex;
+    flex-wrap: wrap;       /* Si se llena la pantalla, los productos bajan solos */
+    gap: 24px;            /* Espacio prolijo entre tarjetas */
+    justify-content: center; /* Centra las tarjetas horizontalmente */
+    padding: 1rem 0;
+}

@@ -1,0 +1,7 @@
+/* /components/Item/Item.module.css */
+.tarjeta {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}

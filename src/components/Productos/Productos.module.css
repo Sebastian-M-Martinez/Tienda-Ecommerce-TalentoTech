@@ -1,0 +1,46 @@
+/* /components/Productos/productos.module.css */
+
+.contenedorLista {
+    display: flex;
+    flex-direction: row;     
+    flex-wrap: wrap;        
+    gap: 25px;              
+    justify-content: center; 
+    list-style: none;       
+    padding: 20px;
+    margin: 0;
+}
+
+.tarjetaProducto {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 15px;
+    width: 220px;           
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    height: 320px; 
+}
+
+.tarjetaProducto img {
+    width: 100%;
+    height: 140px;           
+    object-fit: contain;     
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+
+.tarjetaProducto h2 {
+    font-size: 1.1rem;
+    margin: 0 0 10px 0;
+}
+
+.tarjetaProducto p {
+    font-weight: bold;
+    color: #333;
+    margin: 0; 
+}

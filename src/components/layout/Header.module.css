@@ -1,0 +1,13 @@
+.header{
+        background-color: #8DE2D6;
+        padding: 10px;
+        text-align: center;
+        color: white;
+}
+
+.listaNav{
+        display: flex;
+        gap: 20px;
+        list-style: none;
+        justify-content: center;
+}

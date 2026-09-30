@@ -1,0 +1,7 @@
+.tarjeta{
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: white;
+}
