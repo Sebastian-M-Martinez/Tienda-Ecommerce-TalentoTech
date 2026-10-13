@@ -1,7 +1,12 @@
 import styles from "./Header.module.css";
 import { Link } from "react-router-dom"; // 1. Importamos Link
+import { useCart } from "../../context/CartContext"; // 2. Importamos custom Hook
 
 function Header() {
+  // 3. Usamos el hook para acceder a la funcion
+  const { getCartQuantity } = useCart();
+  const totalItems = getCartQuantity();
+
   return (
     <header
       style={{
@@ -32,7 +37,9 @@ function Header() {
             <Link to="/contacto">Contacto</Link>
           </li>
           <li>
-            <Link to="/carrito">Carrito</Link>
+            <Link to="/carrito">
+              Carrito 🛒 {totalItems > 0 && <span>{totalItems}</span>}
+            </Link>
           </li>
         </ul>
       </nav>

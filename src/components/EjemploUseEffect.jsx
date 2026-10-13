@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react"; // Importamos los hooks juntos
 export function Contador() {
   const [contador, setContador] = useState(0);
@@ -14,5 +15,5 @@ export function Contador() {
   </div>
  ); 
 }
-  
+
   
