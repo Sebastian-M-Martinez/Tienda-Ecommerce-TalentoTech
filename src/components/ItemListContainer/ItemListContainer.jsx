@@ -1,7 +1,10 @@
 import { ItemList } from "../ItemList/ItemList";
 import styles from "./ItemListContainer.module.css"; // Importamos el módulo CSS
+import { useEffect, useState } from "react";
 
 export function ItemListContainer({ Mensaje }) {
+  // --- CÓDIGO ANTERIOR COMENTADO COMO RESPALDO ---
+  /*
   const productos = [
     {
       id: "6",
@@ -32,6 +35,21 @@ export function ItemListContainer({ Mensaje }) {
       imagen: "/images/CamaraNikon.webp",
     },
   ];
+  */
+
+  // --- NUEVA LÓGICA CON FETCH Y ESTADO (CLASE 8) ---
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    fetch("/data/productos.json")
+      .then((respuesta) => respuesta.json())
+      .then((datos) => {
+        setProductos(datos);
+      })
+      .catch((error) =>
+        console.error("Error al cargar los productos:", error),
+      );
+  }, []);
 
   return (
     <div style={{ marginBottom: "40px" }}>

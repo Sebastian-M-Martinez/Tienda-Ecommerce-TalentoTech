@@ -1,21 +1,29 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import { useState } from "react";
-// Importamos tu módulo de estilos original para que no pierdas diseño
+// Importamos el módulo de estilos original para que no pierdas diseño
 import clases from "./Item.module.css";
 
 export function Item({ id, nombre, precio, stock, imagen }) {
   // Creamos el objeto producto a partir de las props
   const producto = { id, nombre, precio, stock, imagen };
 
+  // Traemos la funcion del contexto (clase 9)
+  const { addToCart, getCantidadActual } = useCart();
   const [cantidad, setCantidad] = useState(0);
 
+  // Obtenemos la cantidad YA existente en el carrito desde el contexto (clase 9)
+  const cantidadActual = getCantidadActual(producto.id);
+
   // Mantenemos los estados y funciones anteriores comentadas
+
   /*
   const [esFavorito, setEsFavorito] = useState(false);
+  */
+  const stockDisponible = Number(stock) - getCantidadActual(producto.id);
 
   const incrementar = () => {
-    if (cantidad < stock) {
+    if (cantidad < stockDisponible) {
       setCantidad(cantidad + 1);
     }
   };
@@ -25,13 +33,14 @@ export function Item({ id, nombre, precio, stock, imagen }) {
       setCantidad(cantidad - 1);
     }
   };
-
+  /*
   const marcarComoFavorito = () => {
     setEsFavorito(!esFavorito);
   };
   */
 
   // Lógica del Carrito
+  /*
   const { cart, addToCart } = useCart(); // Traemos la función del contexto
 
   // Buscamos si el producto está en el carrito comparando ambos IDs como string para evitar errores de tipo
@@ -40,12 +49,20 @@ export function Item({ id, nombre, precio, stock, imagen }) {
 
   // Restamos correctamente el stock inicial menos lo que ya está en el carrito
   const stockDisponible = stock - cantidadEnCarrito;
+  //
+  */
 
+  // Funcion incrementar y decrementar
   const handleAddToCart = () => {
     addToCart(producto, cantidad);
     alert(`Agregaste ${cantidad} unidades de ${nombre} al carrito.`);
 
-    setCantidad(0); // <-- AGREGADO: Resetea el contador local tras agregar
+    //setCantidad(0); // <-- AGREGADO: Resetea el contador local tras agregar
+  };
+
+  const [esFavorito, setEsFavorito] = useState(false);
+  const marcarComoFavorito = () => {
+    setEsFavorito(!esFavorito);
   };
 
   return (
@@ -64,8 +81,10 @@ export function Item({ id, nombre, precio, stock, imagen }) {
 
       {/* Incorporamos el detalle del stock */}
       <p>Stock disponible: {stockDisponible}</p>
+      <p>Ya en el carrito: {cantidadActual}</p>
 
       {/* consevamos el contador interactivo*/}
+
       <div
         style={{
           display: "flex",
@@ -74,25 +93,17 @@ export function Item({ id, nombre, precio, stock, imagen }) {
           margin: "10px 0",
         }}
       >
-        <button onClick={() => cantidad > 0 && setCantidad(cantidad - 1)}>
-          -
-        </button>
-        <p style={{ margin: "0 10px" }}>{cantidad}</p>
-        <button
-          onClick={() =>
-            cantidad < stockDisponible && setCantidad(cantidad + 1)
-          }
-        >
-          +
-        </button>
+        <button onClick={decrementar}>-</button>
+        {/* --- Aca le pasamos la cantidad actual que tenemos en el carrito---*/}
+        <p style={{ margin: "0 15px", fontWeight: "bold" }}>{cantidad}</p>
+        <button onClick={incrementar}>+</button>
       </div>
 
       <Link to={`/producto/${producto.id}`}>Ver detalle</Link>
 
-      {/* Mantenemos el favorito y el botón exacto que pide el material de la clase 8 */}
-
-      <button onClick={handleAddToCart} disabled={stockDisponible === 0}>
-        {stockDisponible === 0 ? "Sin stock" : `Agregar ${cantidad} al carrito`}
+      <button onClick={handleAddToCart}>
+        {/* --- Esto es siempre de auno ---*/}
+        Agregar {cantidad} al carrito
       </button>
     </div>
   );

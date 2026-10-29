@@ -4,7 +4,7 @@ import React, { useState, useContext, createContext } from "react";
 // Creacion del contexto
 export const CartContext = createContext();
 
-// Creaciion personalizada del Hook useCart que nos facilitará el consumo del contexto en cualquier componente.
+// Creacion personalizada del Hook useCart que nos facilitará el consumo del contexto en cualquier componente.
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {
@@ -35,6 +35,24 @@ export const CartProvider = ({ children }) => {
     // Si esta, suma la cantidad
     // Si no esta, lo agrega como nuevo
   };
+
+  // NUEVA FUNCION: Eliminar un producto del carrito (clase 9)
+  const removeItem = (productId) => {
+    const updatedCart = cart.filter(item => item.id !== productId);
+    setCart(updatedCart);
+  }; // remorveItem(productId): utiliza el metodo filter() de los vectores para     generar un nuevo carrito que contiene todos lo items excepto el que coincide con el productId recibido. Es una forma inmutable y declarativa de eliminar elementos.
+
+  // NUEVA FUNCION: verificar si un producto ya esta en el carrito (clase 9)
+  const isInCart = (productId) => {
+    return cart.some(item => item.id == productId);
+  };  // isInCart(productId): usa el metodo some(), que devuelve true si al menos un elemento del vector/array cumple con la condicion (si algun item.id es igual al productId). Es ideal para validaciones rapidas.
+
+  // NUEVA FUNCION (clase 9): Obtener la acantidad de un item especifico
+  const getCantidadActual = (productId) => {
+    const item = cart.find((item) => item.id === productId);
+    return item ? item.quantity : 0;
+  };
+
   //Funcion clearCart
   const clearCart = () => {
     setCart([]);
@@ -54,14 +72,22 @@ export const CartProvider = ({ children }) => {
   // Retorno del CartProvider
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, clearCart, getCartQuantity, getCartTotal }}
-    >
+      value={{
+        cart,
+        getCantidadActual,
+        addToCart,
+        clearCart,
+        getCartQuantity,
+        getCartTotal,
+        removeItem, // exportamos la nueva funcion (clase 9)
+        isInCart    // exportamos la nueva funcion (clase 9)
+      }}>
       {children}
     </CartContext.Provider>
   ); // CartContext.Provider es el que realmente comparte la informacion.
   /* El value={{...}} contiene todo lo que cualquier componente va a poder usar:
                 cart, es el estado del carrito.
-                addToCart, clearCart, getCartQuantity, getCartTotal, son las funciones que controlan el carrito
+                getCantidadActual, addToCart, clearCart, getCartQuantity, getCartTotal, son las funciones que controlan el carrito
             */
-  // {children} asegura que todo lo que envuelva CartProvider (la App cmpleta o un grupo de componenetes) pueda acceder al carrito
+  // {children} asegura que todo lo que envuelva CartProvider (la App completa o un grupo de componenetes) pueda acceder al carrito
 };
